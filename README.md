@@ -13,12 +13,6 @@ Este projeto foi criado como um exercício prático para reforçar conceitos fun
 * **Interface Colorida:** Utiliza códigos de cores ANSI para melhorar a experiência do usuário no terminal.
 * **Validação de Entrada:** Trata entradas inválidas do usuário para evitar que o programa quebre.
 
-## Análise Construtiva e Estrutura do Código
-
-O projeto foi estruturado de forma modular, com cada funcionalidade do menu encapsulada em sua própria função (`nova_tarefa`, `marcar_concluida`, etc.).
-
-A gestão de dados é feita através de duas listas globais (`tarefas` e `status_tarefas`), onde o índice de uma corresponde ao da outra. Embora funcional, uma melhoria futura seria refatorar essa estrutura para uma lista de dicionários ou objetos, tornando o código mais robusto e menos suscetível a erros de sincronização.
-
 ## Próximos Passos
 
 Para evoluir o projeto, os seguintes passos são planejados:
