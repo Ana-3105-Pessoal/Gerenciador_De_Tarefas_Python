@@ -6,23 +6,7 @@ red = "\033[91m"
 roxo = "\033[94m"
 amarelo = "\033[93m"
 
-#Emojis
-('\U0001F602') #rindo chorando
-('\U0001F92A') #cara maluca
-('\U0001F928') #sombrancelha levantada
-('\U0001F634') #dormindo
-('\U0001F62D') #chorando
-('\U0001F631') #assustado
-('\U0001F4A2') #simbolo de furia
-('\U0001F921') #palhaço
-('\U00002764') #coração branco
-('\U0001F494') #coração partido
-('\U0001F620') #cara braba
-
-tarefas = []
-status_tarefas = []
-
-def menu():
+def menu(): #Exibe o menu para o usuário
   print(f'{cyan}--- Gerenciador de Tarefas ---{reset}')
   print(f'{cyan}1.{reset}{verde} Adicionar uma nova tarefa {reset}')
   print(f'{cyan}2.{reset}{verde} Marcar uma tarefa como concluída {reset}')
@@ -31,105 +15,102 @@ def menu():
   print(f'{cyan}5.{reset}{verde} Listar todas as tarefas concluídas {reset}')
   print(f'{cyan}6.{reset}{verde} FIM {reset}')
 
-def nova_tarefa():
+def adicionar_tarefa(lista_tarefas):
   while True:
-    try:
-      tarefa = input('Descrição da nova tarefa (0==Encerra): ')
-      if tarefa == '':
-        print(f'{red}DESCRIÇÃO VAZIA!!!{reset}')
-      elif tarefa == '0':
+      tarefa = input('Descrição da nova tarefa (0 para voltar): ')
+      if tarefa == '0':
         print(f'{red}Voltando ao menu...{reset}')
         break
+      if not tarefa.strip(): #Verifica se não está vazia ou com espaços
+        print(f'{red}A descrição está vazia!{reset}')
       else:
-        print(f'{verde}Tarefa adicionada com sucesso!!!{reset}')
-        tarefas.append(tarefa)
-        status_tarefas.append(False)
-    except:
-      print(f'{red}ENTRADA INVÁLIDA!!!{reset}')
+        nova_tarefa = {'tarefa': tarefa, 'concluida': False}
+        lista_tarefas.append(nova_tarefa)
+        print(f'{verde}Tarefa adicionada com sucesso!{reset}')
   print(f'{cyan}-{reset}'*50)
   print('\n')
+  return lista_tarefas
 
-def marcar_concluida():
+def marcar_concluida(lista_tarefas):
+  print(f'{cyan}--- Marcar Tarefa como Concluída ---{reset}')
+  if not listar_tarefas(lista_tarefas, pendentes=True, concluidas=False):
+    print(f'{amarelo}Nenhuma tarefa pendente para marcar.{reset}')
+    print(f'{cyan}-{reset}'*50)
+    print('\n')
+    return lista_tarefas
+
   while True:
     try:
-      concluir = int(input('Qual o número da tarefa a ser marcada como concluída? '))
-      if 1 <= concluir <= len(tarefas):
-        if status_tarefas[concluir - 1] == True:
-          print(f'{red}Essa tarefa já está concluída!!!{reset}')
+      escolha = int(input('Qual o número da tarefa a ser marcada como concluída? (0 para voltar): '))
+      if escolha == 0:
+        print(f'{red}Voltando ao menu...{reset}')
+        break
+
+      indice = escolha - 1
+
+
+      if 0 <= indice < len(lista_tarefas):
+        if lista_tarefas[indice]['concluida']:
+          print(f'{red}Essa tarefa já está concluída!{reset}')
         else:
-          status_tarefas[concluir - 1] = True
-          print(f'{verde}Tarefa concluída com sucesso!!!{reset}')
+          lista_tarefas[indice]['concluida'] = True
+          print(f'{verde}Tarefa concluída com sucesso!{reset}')
           break
-      elif concluir == 0:
-        print(f'{red}Voltando ao menu...{reset}')
-        break
       else:
-        print(f'{red}Número de tarefa inválido!!!{reset}')
-        print(f'{amarelo}Pressione 0 para sair!!!{reset}')
-    except:
-      print(f'{red}ENTRADA INVÁLIDA!!!{reset}')
+        print(f'{red}Número de tarefa inválido!{reset}')
+    except ValueError:
+      print(f'{red}ENTRADA INVÁLIDA! Digite um número{reset}')
   print(f'{cyan}-{reset}'*50)
   print('\n')
+  return lista_tarefas
 
-def listar_tarefas():
-  print(f'{cyan}--- Todas as Tarefas ---{reset}')
-  if not tarefas:
-    print(f'{amarelo}Nenhuma tarefa cadastrada!!!{reset}')
-  for i in range(len(tarefas)):
-    if status_tarefas[i] == True:
-      print(f'{i + 1}. {tarefas[i]} - {verde}Concluída{reset}')
-    else:
-      print(f'{i + 1}. {tarefas[i]} - {red}Pendente{reset}')
-  print(f'{cyan}-{reset}'*50)
-  print('\n')
+def listar_tarefas(lista_tarefas, pendentes=True, concluidas=True):
+  tarefas_encontrada = False
+  for i, tarefa in enumerate(lista_tarefas):
+    if (tarefa['concluida'] and concluidas) or (not tarefa['concluida'] and pendentes):
+      status = f'{verde}Concluída{reset}' if tarefa['concluida'] else f'{red}Pendente{reset}'
+      print(f'{i+1}.{tarefa["tarefa"]} - {status}')
+      tarefas_encontrada = True
+  return tarefas_encontrada
 
-def listar_pendentes():
-  print(f'{cyan}--- Tarefas Pendentes ---{reset}')
-  pendentes = False
-  for i in range(len(tarefas)):
-    if status_tarefas[i] == False:
-      print(f'{i + 1}. {tarefas[i]}')
-      pendentes = True
-  if pendentes == False:
-      print(f'{roxo}Parabéns!!! Sem tarefas pendentes!!! {reset}')
-  print(f'{cyan}-{reset}'*50)
-  print('\n')
 
-def listar_concluidas():
-  print(f'{cyan}--- Tarefas Concluídas ---{reset}')
-  concluidas = False
-  for i in range(len(tarefas)):
-    if status_tarefas[i] == True:
-      print(f'{i + 1}. {tarefas[i]}')
-      concluidas = True
-  if concluidas == False:
-      print(f'{roxo}Ao trabalho!!! Sem tarefas concluídas AINDA!!! {reset}')
-  print(f'{cyan}-{reset}'*50)
-  print('\n')
+def main():
+  minhas_tarefas = []
 
-while True:
   while True:
     menu()
-    try:
+    print(f'{cyan}-{reset}'*50)
+    opcao = input('Escolha uma opção: ')
+    print(f'{cyan}-{reset}'*50)
+
+    if opcao == '1':
+      minhas_tarefas = adicionar_tarefa(minhas_tarefas)
+    elif opcao == '2':
+      minhas_tarefas = marcar_concluida(minhas_tarefas)
+    elif opcao == '3':
+      print(f'{cyan}--- Todas as Tarefas ---{reset}')
+      if not listar_tarefas(minhas_tarefas):
+        print(f'{amarelo}Nenhuma tarefa cadastrada.{reset}')
       print(f'{cyan}-{reset}'*50)
-      opcao = input('Escolha uma opção: ')
+      print('\n')
+    elif opcao == '4':
+      print(f'{cyan}--- Tarefas Pendentes ---{reset}')
+      if not listar_tarefas(minhas_tarefas,pendentes=True, concluidas=False):
+        print(f'{roxo}Parabéns! Nenhuma tarefa pendente.{reset}')
       print(f'{cyan}-{reset}'*50)
+      print('\n')
+    elif opcao == '5':
+      print(f'{cyan}--- Tarefas Concluídas ---{reset}')
+      if not listar_tarefas(minhas_tarefas,pendentes=False, concluidas=True):
+        print(f'{roxo}Nenhuma tarefa foi concluída ainda.{reset}')
+      print(f'{cyan}-{reset}'*50)
+      print('\n')
+    elif opcao == '6':
+      print(f'{red}Encerrando o programa...{reset}')
       break
-    except:
-      print(f'{red}ENTRADA INVÁLIDA!!!{reset}')
-  if opcao == '1':
-    nova_tarefa()
-  elif opcao == '2':
-    listar_pendentes()
-    marcar_concluida()
-  elif opcao == '3':
-    listar_tarefas()
-  elif opcao == '4':
-    listar_pendentes()
-  elif opcao == '5':
-    listar_concluidas()
-  elif opcao == '6':
-    print(f'{red}Encerrando o programa...{reset}')
-    break
-  else:
-    print(f'{red}OPÇÃO INVÁLIDA!!! tente uma opcão VÁLIDA!!!{reset}')
+    else:
+      print(f'{red}OPÇÃO INVÁLIDA! Tente novamente.{reset}')
+
+
+if __name__ == "__main__":
+    main()
