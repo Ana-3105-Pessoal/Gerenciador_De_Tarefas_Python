@@ -24,6 +24,6 @@ A gestão de dados é feita através de duas listas globais (`tarefas` e `status
 Para evoluir o projeto, os seguintes passos são planejados:
 
 * [ ] **Persistência de Dados:** Implementar a capacidade de salvar as tarefas em um arquivo (como `.json` ou `.txt`) para que não se percam ao fechar o programa.
-* [X] **Refatorar Estrutura de Dados:** Substituir as duas listas por uma estrutura única (lista de dicionários ou de objetos) para aumentar a integridade dos dados.
+* [ X] **Refatorar Estrutura de Dados:** Substituir as duas listas por uma estrutura única (lista de dicionários ou de objetos) para aumentar a integridade dos dados.
 * [ ] **Adicionar Funcionalidades:** Incluir opções para **excluir** e **editar** tarefas existentes.
-* [X] **Eliminar Variáveis Globais:** Modificar as funções para que recebam a lista de tarefas como parâmetro, em vez de depender de variáveis globais, seguindo melhores práticas de programação.
+* [X ] **Eliminar Variáveis Globais:** Modificar as funções para que recebam a lista de tarefas como parâmetro, em vez de depender de variáveis globais, seguindo melhores práticas de programação.
