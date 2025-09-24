@@ -10,7 +10,7 @@ def menu(): #Exibe o menu para o usuário
   print(f'{cyan}--- Gerenciador de Tarefas ---{reset}')
   print(f'{cyan}1.{reset}{verde} Adicionar uma nova tarefa {reset}')
   print(f'{cyan}2.{reset}{verde} Marcar uma tarefa como concluída {reset}')
-  print(f'{cyan}3.{reset}{verde} Listar todas as tarefas, indicando seus status {reset}')
+  print(f'{cyan}3.{reset}{verde} Listar todas as tarefas {reset}')
   print(f'{cyan}4.{reset}{verde} Listar todas as tarefas pendentes {reset}')
   print(f'{cyan}5.{reset}{verde} Listar todas as tarefas concluídas {reset}')
   print(f'{cyan}6.{reset}{verde} FIM {reset}')
