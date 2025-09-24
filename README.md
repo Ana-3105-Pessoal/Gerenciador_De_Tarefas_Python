@@ -12,12 +12,3 @@ Este projeto foi criado como um exercício prático para reforçar conceitos fun
 * **Filtros de Visualização:** Permite listar apenas as tarefas pendentes ou apenas as concluídas.
 * **Interface Colorida:** Utiliza códigos de cores ANSI para melhorar a experiência do usuário no terminal.
 * **Validação de Entrada:** Trata entradas inválidas do usuário para evitar que o programa quebre.
-
-## Próximos Passos
-
-Para evoluir o projeto, os seguintes passos são planejados:
-
-* [ ] **Persistência de Dados:** Implementar a capacidade de salvar as tarefas em um arquivo (como `.json` ou `.txt`) para que não se percam ao fechar o programa.
-* [X] **Refatorar Estrutura de Dados:** Substituir as duas listas por uma estrutura única (lista de dicionários ou de objetos) para aumentar a integridade dos dados.
-* [ ] **Adicionar Funcionalidades:** Incluir opções para **excluir** e **editar** tarefas existentes.
-* [X] **Eliminar Variáveis Globais:** Modificar as funções para que recebam a lista de tarefas como parâmetro, em vez de depender de variáveis globais.
