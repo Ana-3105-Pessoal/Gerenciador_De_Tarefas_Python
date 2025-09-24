@@ -24,12 +24,12 @@ def adicionar_tarefa(lista_tarefas):
       if not tarefa.strip(): #Verifica se não está vazia ou com espaços
         print(f'{red}A descrição está vazia!{reset}')
       else:
-        nova_tarefa = {'tarefa': tarefa, 'concluida': False}
-        lista_tarefas.append(nova_tarefa)
+        nova_tarefa = {'tarefa': tarefa, 'concluida': False} 
+        lista_tarefas.append(nova_tarefa) 
         print(f'{verde}Tarefa adicionada com sucesso!{reset}')
   print(f'{cyan}-{reset}'*50)
   print('\n')
-  return lista_tarefas
+  return lista_tarefas 
 
 def marcar_concluida(lista_tarefas):
   print(f'{cyan}--- Marcar Tarefa como Concluída ---{reset}')
@@ -37,7 +37,7 @@ def marcar_concluida(lista_tarefas):
     print(f'{amarelo}Nenhuma tarefa pendente para marcar.{reset}')
     print(f'{cyan}-{reset}'*50)
     print('\n')
-    return lista_tarefas
+    return lista_tarefas 
 
   while True:
     try:
@@ -46,10 +46,10 @@ def marcar_concluida(lista_tarefas):
         print(f'{red}Voltando ao menu...{reset}')
         break
 
-      indice = escolha - 1
+      indice = escolha - 1 #Ajuste para indice que começa em 0
 
 
-      if 0 <= indice < len(lista_tarefas):
+      if 0 <= indice < len(lista_tarefas): 
         if lista_tarefas[indice]['concluida']:
           print(f'{red}Essa tarefa já está concluída!{reset}')
         else:
@@ -62,19 +62,19 @@ def marcar_concluida(lista_tarefas):
       print(f'{red}ENTRADA INVÁLIDA! Digite um número{reset}')
   print(f'{cyan}-{reset}'*50)
   print('\n')
-  return lista_tarefas
+  return lista_tarefas 
 
-def listar_tarefas(lista_tarefas, pendentes=True, concluidas=True):
+def listar_tarefas(lista_tarefas, pendentes=True, concluidas=True): 
   tarefas_encontrada = False
-  for i, tarefa in enumerate(lista_tarefas):
+  for i, tarefa in enumerate(lista_tarefas): 
     if (tarefa['concluida'] and concluidas) or (not tarefa['concluida'] and pendentes):
-      status = f'{verde}Concluída{reset}' if tarefa['concluida'] else f'{red}Pendente{reset}'
+      status = f'{verde}Concluída{reset}' if tarefa['concluida'] else f'{red}Pendente{reset}' 
       print(f'{i+1}.{tarefa["tarefa"]} - {status}')
       tarefas_encontrada = True
-  return tarefas_encontrada
+  return tarefas_encontrada 
 
 
-def main():
+def main(): 
   minhas_tarefas = []
 
   while True:
@@ -95,7 +95,7 @@ def main():
       print('\n')
     elif opcao == '4':
       print(f'{cyan}--- Tarefas Pendentes ---{reset}')
-      if not listar_tarefas(minhas_tarefas,pendentes=True, concluidas=False):
+      if not listar_tarefas(minhas_tarefas,pendentes=True, concluidas=False): 
         print(f'{roxo}Parabéns! Nenhuma tarefa pendente.{reset}')
       print(f'{cyan}-{reset}'*50)
       print('\n')
