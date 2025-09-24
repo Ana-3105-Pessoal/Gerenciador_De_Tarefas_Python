@@ -1,4 +1,4 @@
-#Cores
+#Cores para formatação do texto no terminal
 reset = "\033[0m"
 cyan = "\033[96m"
 verde = "\033[92m"
@@ -6,7 +6,11 @@ red = "\033[91m"
 roxo = "\033[94m"
 amarelo = "\033[93m"
 
-def menu(): #Exibe o menu para o usuário
+def menu():
+  """
+  Exibe o menu principal de opções para o usuário.
+  Não possui parâmetros e não retorna nada.
+  """
   print(f'{cyan}--- Gerenciador de Tarefas ---{reset}')
   print(f'{cyan}1.{reset}{verde} Adicionar uma nova tarefa {reset}')
   print(f'{cyan}2.{reset}{verde} Marcar uma tarefa como concluída {reset}')
@@ -16,6 +20,18 @@ def menu(): #Exibe o menu para o usuário
   print(f'{cyan}6.{reset}{verde} FIM {reset}')
 
 def adicionar_tarefa(lista_tarefas):
+  """
+  Adiciona uma nova tarefa à lista de tarefas.
+
+  A função entra em um loop que solicita a descrição da tarefa.
+  Uma nova tarefa é um dicionário com a descrição e o status 'concluida' como False.
+
+  Args:
+      lista_tarefas (list): A lista de tarefas existente.
+
+  Returns:
+      list: A lista de tarefas atualizada com a nova tarefa.
+  """
   while True:
       tarefa = input('Descrição da nova tarefa (0 para voltar): ')
       if tarefa == '0':
@@ -32,6 +48,18 @@ def adicionar_tarefa(lista_tarefas):
   return lista_tarefas 
 
 def marcar_concluida(lista_tarefas):
+  """
+  Marca uma tarefa pendente como concluída.
+
+  Primeiro, lista apenas as tarefas pendentes. Em seguida, solicita ao usuário
+  o número da tarefa a ser marcada. Valida a entrada e atualiza o status.
+
+  Args:
+      lista_tarefas (list): A lista de tarefas.
+
+  Returns:
+      list: A lista de tarefas com o status da tarefa escolhida atualizado.
+  """
   print(f'{cyan}--- Marcar Tarefa como Concluída ---{reset}')
   if not listar_tarefas(lista_tarefas, pendentes=True, concluidas=False):
     print(f'{amarelo}Nenhuma tarefa pendente para marcar.{reset}')
@@ -65,6 +93,17 @@ def marcar_concluida(lista_tarefas):
   return lista_tarefas 
 
 def listar_tarefas(lista_tarefas, pendentes=True, concluidas=True): 
+  """
+  Lista as tarefas com base nos filtros de status.
+
+  Args:
+      lista_tarefas (list): A lista completa de tarefas.
+      pendentes (bool): Se True, exibe as tarefas pendentes. Padrão é True.
+      concluidas (bool): Se True, exibe as tarefas concluídas. Padrão é True.
+
+  Returns:
+      bool: Retorna True se alguma tarefa foi encontrada e listada, caso contrário, False.
+  """
   tarefas_encontrada = False
   for i, tarefa in enumerate(lista_tarefas): 
     if (tarefa['concluida'] and concluidas) or (not tarefa['concluida'] and pendentes):
@@ -75,6 +114,12 @@ def listar_tarefas(lista_tarefas, pendentes=True, concluidas=True):
 
 
 def main(): 
+  """
+  Função principal que executa o programa Gerenciador de Tarefas.
+
+  Inicializa a lista de tarefas e entra em um loop infinito para exibir o menu,
+  capturar a entrada do usuário e chamar as funções correspondentes.
+  """
   minhas_tarefas = []
 
   while True:
@@ -111,6 +156,7 @@ def main():
     else:
       print(f'{red}OPÇÃO INVÁLIDA! Tente novamente.{reset}')
 
-
+# Este bloco verifica se o script está sendo executado diretamente
+# Se for o caso, ele chama a função main()
 if __name__ == "__main__":
     main()
